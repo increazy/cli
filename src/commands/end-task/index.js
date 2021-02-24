@@ -1,6 +1,7 @@
 const commitTaskIfChanges = require('../_utils/commit-task-if-changes')
 const getCurrentBranch = require('../_utils/get-current-brach')
 const mergeToMaster = require('./merge-to-master')
+const pushCurrentTask = require('./push-current-task')
 
 module.exports = (cli, program) => {
     program
@@ -11,8 +12,7 @@ module.exports = (cli, program) => {
                 await cli.middleware(['auth'])
                 await commitTaskIfChanges(cli, 'end this task')
                 const branch = getCurrentBranch(cli)
-                await cli.git(`commit -m "increazy: finish task '${branch}'"`)
-                await cli.git(`push origin ${branch} --force`)
+                await pushCurrentTask(cli, branch)
                 mergeToMaster(cli, branch)
 
                 cli.echo('green', `✅ '${branch}' was finalized and sent to master, now you can deploy it`)
