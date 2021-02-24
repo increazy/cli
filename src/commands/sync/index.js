@@ -9,7 +9,7 @@ module.exports = (cli, program) => {
         .action(async() => {
             try {
                 await cli.middleware(['auth'])
-                const branch = getCurrentBrach(cli)
+                const branch = await getCurrentBrach(cli)
                 cli.echo('white', `🎈 Synchronizing task '${branch}'..`)
                 await commitTaskIfChanges(cli, 'sync')
                 await pushBranch(cli)

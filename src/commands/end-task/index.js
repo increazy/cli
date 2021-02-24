@@ -11,7 +11,7 @@ module.exports = (cli, program) => {
             try {
                 await cli.middleware(['auth'])
                 await commitTaskIfChanges(cli, 'end this task')
-                const branch = getCurrentBranch(cli)
+                const branch = await getCurrentBranch(cli)
                 await pushCurrentTask(cli, branch)
                 await mergeToMaster(cli, branch)
 
