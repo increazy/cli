@@ -5,8 +5,9 @@ module.exports = async(cli, task, fromList) => {
         await cli.git(`pull origin ${task} --force`)
         cli.echo('yellow', '🚸 This task already exists, we recovered it, now it\'s just coding!')
     } else {
+        await cli.git('add .')
         await cli.git(`commit -m "increazy: create task '${task}'"`)
-        await cli.git(`push origin ${task} --force`)
+        await cli.git(`push origin ${task}`)
         cli.echo('green', '✅ We created the task for you, now just code!')
     }
 }
