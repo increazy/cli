@@ -8,7 +8,7 @@ module.exports = async cli => {
     await cli.git('fetch --all')
     await cli.git('pull --all')
 
-    const tasksStr = cli.git('branch -a').replace(/remotes\/origin\//g, '')
+    const tasksStr = await cli.git('branch -a').replace(/remotes\/origin\//g, '')
     const othersTasks = tasksStr.split('\n')
         .map(t => t.trim())
         .filter(t => t !== '')

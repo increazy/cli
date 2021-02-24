@@ -3,7 +3,7 @@ module.exports = async(cli, project, folder) => {
         cli.echo('white', `🧡 Git repository checked! (${project.git})`)
         const loading = cli.loading(['Cloning Git repository...'], 1000, 'Git cloned!').start()
         cli.exec('cd', [folder])
-        cli.git(`clone ${project.git} .`)
+        await cli.git(`clone ${project.git} .`)
         await loading.end()
         return 1
     }

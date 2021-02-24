@@ -3,9 +3,9 @@ module.exports = async(cli, folder, project) => {
     cli.file.writeCwd(folder, '.gitignore', gitignore)
 
     cli.exec('cd', [folder])
-    cli.git('init')
-    cli.git('add .')
-    cli.git('commit -m "initial commit"')
-    cli.git(`remote add origin ${project.git}`)
+    await cli.git('init')
+    await cli.git('add .')
+    await cli.git('commit -m "initial commit"')
+    await cli.git(`remote add origin ${project.git}`)
     await cli.git('push -u origin master --force')
 }

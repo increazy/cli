@@ -36,7 +36,7 @@ module.exports = (cli, program) => {
 
                 await loading.end()
 
-                const status = cli.git('status')
+                const status = await cli.git('status')
                 const rChanges = /working directory\)\n\n(?<changes>.*?)\n\n/gms
                 const changes = rChanges.exec(status)
                 if ((changes || []).length > 1) {

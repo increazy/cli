@@ -6,6 +6,6 @@ module.exports = async(cli, task) => {
         throw new Error('')
     }
 
-    cli.git(`commit -m "increazy: finish task '${task}'"`)
+    await cli.git(`commit -m "increazy: finish task '${task}'"`)
     await cli.git(`push origin ${task}`)
 }

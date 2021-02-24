@@ -13,7 +13,7 @@ module.exports = (cli, program) => {
                 await commitTaskIfChanges(cli, 'end this task')
                 const branch = getCurrentBranch(cli)
                 await pushCurrentTask(cli, branch)
-                mergeToMaster(cli, branch)
+                await mergeToMaster(cli, branch)
 
                 cli.echo('green', `✅ '${branch}' was finalized and sent to master, now you can deploy it`)
                 cli.echo('white', '🚗 we moved you to the task master now')

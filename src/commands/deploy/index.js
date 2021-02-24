@@ -21,7 +21,7 @@ module.exports = (cli, program) => {
                 console.time('🕓 Deployment duration: ')
                 const { changes, saveNewHistory } = await checkChanges(cli)
                 const settings = await settingsToJSON(cli)
-                checkGitBranch(cli, env, settings)
+                await checkGitBranch(cli, env, settings)
 
                 setTimeout(() => loading.start(), 500)
                 const codes = await codeToJSON(cli)

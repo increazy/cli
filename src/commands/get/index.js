@@ -34,7 +34,7 @@ module.exports = (cli, program) => {
                 createHistory(cli, folder)
 
                 if (gitStatus === 0) {
-                    createGit(cli, folder, settings.pwa)
+                    await createGit(cli, folder, settings.pwa)
                 }
 
                 await loading.end()

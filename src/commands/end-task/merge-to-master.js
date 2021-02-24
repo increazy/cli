@@ -1,5 +1,5 @@
-module.exports = (cli, branch) => {
-    cli.git('checkout master')
+module.exports = async(cli, branch) => {
+    await cli.git('checkout master')
     const pull = cli.git('pull origin master')
     if (pull.includes('CONFLICT (content)')) {
         cli.echo('red', '❌ We detected a conflict in the edits, fix it before continuing:')
@@ -7,6 +7,6 @@ module.exports = (cli, branch) => {
         throw new Error('')
     }
 
-    cli.git(`merge ${branch}`)
-    cli.git('push origin master')
+    await cli.git(`merge ${branch}`)
+    await cli.git('push origin master')
 }
