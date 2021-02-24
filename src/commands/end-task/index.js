@@ -11,6 +11,8 @@ module.exports = (cli, program) => {
                 await cli.middleware(['auth'])
                 await commitTaskIfChanges(cli, 'end this task')
                 const branch = getCurrentBranch(cli)
+                await cli.git(`commit -m "increazy: finish task '${branch}'"`)
+                await cli.git(`push origin ${branch} --force`)
                 mergeToMaster(cli, branch)
 
                 cli.echo('green', `✅ '${branch}' was finalized and sent to master, now you can deploy it`)

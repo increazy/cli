@@ -39,10 +39,11 @@ increazy login
 Vamos mostrar brevemente a sequência que você deve seguir para ter um fluxo de trabalho totalmente adaptado ao Git:
 
 1. `increazy get` - a primeira coisa é baixar o projeto, ao baixar deverá colocar a URL do repositório Git previamente criado para o projeto.
-2. `increazy task` - crie uma nova tarefa, para que você possa separar seu código de outros desenvolvedores.
-3. `increazy rebase` - (opcional) a qualquer momento, você pode executar o rebase para obter todo o código do painel online, então, se algum desenvolvedor tiver editado o projeto no painel, você receberá atualizações.
-4. `increazy sync` - (opcional) a qualquer momento você pode sincronizar sua tarefa, se outro desenvolvedor estiver trabalhando nisso ao mesmo tempo você receberá as alterações dele.
-5. `increazy serve` - você pode iniciar um servidor local para editar rapidamente algum código, este comando não executa a PWA, executa apenas um código estático semelhante ao layout final.
-6. `increazy deploy` - além de testar o layout localmente, você pode enviar sua tarefa para um ambiente de teste, para isso, execute o deploy e escolha um ambiente de teste adequado para fazer deploy das alterações.
-7. `increazy end-task` - quando terminar sua tarefa, execute este comando para misturar o código da tarefa com o código do principal projeto.
-8. `increazy deploy` - no final da tarefa você provavelmente desejará colocar o código dela em produção, então, execute o deploy novamente, mas agora envie ele diretamente para produção.
+2. `cd folder` - entre na pasta do projeto.
+3. `increazy task` - crie uma nova tarefa, para que você possa separar seu código de outros desenvolvedores.
+4. `increazy rebase` - (opcional) a qualquer momento, você pode executar o rebase para obter todo o código do painel online, então, se algum desenvolvedor tiver editado o projeto no painel, você receberá atualizações.
+5. `increazy sync` - (opcional) a qualquer momento você pode sincronizar sua tarefa, se outro desenvolvedor estiver trabalhando nisso ao mesmo tempo você receberá as alterações dele.
+6. `increazy serve` - você pode iniciar um servidor local para editar rapidamente algum código, este comando não executa a PWA, executa apenas um código estático semelhante ao layout final.
+7. `increazy deploy` - além de testar o layout localmente, você pode enviar sua tarefa para um ambiente de teste, para isso, execute o deploy e escolha um ambiente de teste adequado para fazer deploy das alterações.
+8. `increazy end-task` - quando terminar sua tarefa, execute este comando para misturar o código da tarefa com o código do principal projeto.
+9. `increazy deploy` - no final da tarefa você provavelmente desejará colocar o código dela em produção, então, execute o deploy novamente, mas agora envie ele diretamente para produção.

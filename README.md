@@ -39,10 +39,11 @@ increazy login
 Let's briefly show the sequence you must follow to have a workflow fully adapted to Git:
 
 1. `increazy get` - the first thing is to download the project, when downloading you will have to put the URL of the Git repository previously created for the project.
-2. `increazy task` - create a new task, so you can separate your code from other developers.
-3. `increazy rebase` - (optional) at any time you can rebase to get all the code from the dashboard online, so if any developer has edited the project on the dashboard you will get updates.
-4. `increazy sync` - (optional) at any time you can synchronize your task, if another developer is working on it at the same time you will get updates from him.
-5. `increazy serve` - you can start a local server to quickly edit some code, this command does not execute the PWA itself, it just serves a static code similar to the final layout.
-6. `increazy deploy` - in addition to testing the layout locally, you can send your task to a test environment, for that use deploy and choose a suitable test environment to upload changes.
-7. `increazy end-task` - when you finish your task, run this command to mix your task code with the main project code.
-8. `increazy deploy` - at the end of the task you will probably want to put it into production, then run the deploy again, but now sending it directly to production.
+2. `cd folder` - enter the project folder.
+3. `increazy task` - create a new task, so you can separate your code from other developers.
+4. `increazy rebase` - (optional) at any time you can rebase to get all the code from the dashboard online, so if any developer has edited the project on the dashboard you will get updates.
+5. `increazy sync` - (optional) at any time you can synchronize your task, if another developer is working on it at the same time you will get updates from him.
+6. `increazy serve` - you can start a local server to quickly edit some code, this command does not execute the PWA itself, it just serves a static code similar to the final layout.
+7. `increazy deploy` - in addition to testing the layout locally, you can send your task to a test environment, for that use deploy and choose a suitable test environment to upload changes.
+8. `increazy end-task` - when you finish your task, run this command to mix your task code with the main project code.
+9. `increazy deploy` - at the end of the task you will probably want to put it into production, then run the deploy again, but now sending it directly to production.

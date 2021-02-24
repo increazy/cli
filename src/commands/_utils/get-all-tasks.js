@@ -18,5 +18,7 @@ module.exports = async cli => {
     const tasks = [currentFormatted].concat(othersTasks)
     await syncLoading.end()
 
-    return tasks
+    return tasks.filter(function(task, index) {
+        return tasks.indexOf(task) === index
+    })
 }
