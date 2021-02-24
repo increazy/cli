@@ -14,11 +14,9 @@ module.exports = async cli => {
         .filter(t => t !== '')
         .filter(t => !t.startsWith('*'))
 
-    const currentFormatted = getCurrentBrach(cli)
+    const currentFormatted = await getCurrentBrach(cli)
     const tasks = [currentFormatted].concat(othersTasks)
     await syncLoading.end()
 
-    return tasks.filter(function(task, index) {
-        return tasks.indexOf(task) === index
-    })
+    return tasks.filter((task, index) => tasks.indexOf(task) === index)
 }
