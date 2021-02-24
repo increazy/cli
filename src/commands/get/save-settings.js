@@ -1,6 +1,8 @@
+const fs = require('fs')
+
 module.exports = (cli, folder, project) => {
     folder = `${folder}/.increazy`
-    cli.exec('mkdir', ['-p', folder])
+    fs.mkdirSync(folder, { recursive: true })
 
     const data = {
         ...project.pwa,

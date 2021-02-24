@@ -24,9 +24,10 @@ module.exports = (cli, program) => {
                 const folder = process.cwd()
 
                 loading.start()
-                cli.exec('rm', ['-rf', `${folder}/drive`])
-                cli.exec('rm', ['-rf', `${folder}/pages`])
-                cli.exec('rm', ['-rf', `${folder}/*.*`])
+                fs.rmdirSync(`${folder}/drive`, { recursive: true })
+                fs.rmdirSync(`${folder}/pages`, { recursive: true })
+                fs.rmdirSync(`${folder}/*.*`, { recursive: true })
+
                 const settings = await downloadProject(cli, project, '0')
                 saveDrive(cli, folder, settings.files)
                 saveCode(cli, folder, settings.codes)

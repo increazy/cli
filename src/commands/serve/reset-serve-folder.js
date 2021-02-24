@@ -1,7 +1,10 @@
+const fs = require('fs')
+
 module.exports = cli => {
     const serveFolder = process.cwd() + '/.increazy/.serve'
-    cli.exec('rm', ['-rf', serveFolder])
-    cli.exec('mkdir', ['-p', serveFolder])
+    fs.rmdirSync(serveFolder, { recursive: true })
+    fs.mkdirSync(serveFolder, { recursive: true })
+
 
     return serveFolder
 }

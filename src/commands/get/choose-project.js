@@ -37,10 +37,10 @@ module.exports = async cli => {
         })
 
         if (!toOverwrite) throw new Error('❌ Aborted')
-        cli.exec('rm', ['-rf', folder])
+        fs.rmdirSync(folder, { recursive: true })
     }
 
-    cli.exec('mkdir', ['-p', folder])
+    fs.mkdirSync(folder, { recursive: true })
 
     return { project, folder }
 }

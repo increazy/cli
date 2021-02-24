@@ -1,9 +1,10 @@
 const path = require('path')
+const fs = require('fs')
 
 module.exports = async(cli, email, password) => {
     const response = (await cli.http('p:/auth', 'post', { email, password })).data
     const { user } = response
-    cli.exec('mkdir', ['-p', path.resolve(__dirname, '../../.data')])
+    fs.mkdirSync(path.resolve(__dirname, '../../.data'), { recursive: true })
     cli.file.write('.auth', user.cli_key)
 
     return user

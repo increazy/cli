@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 module.exports = (cli, folder, codes) => {
     const pages = []
 
@@ -23,10 +25,10 @@ module.exports = (cli, folder, codes) => {
         }
 
         const _folder = `${folder}/${subfolder}`
-        cli.exec('mkdir', ['-p', _folder])
+        fs.mkdirSync(_folder, { recursive: true })
         cli.file.writeCwd(_folder, name.replace(/^__/, ''), code.content)
     })
 
-    cli.exec('mkdir', ['-p', `${folder}/.increazy`])
+    fs.mkdirSync(`${folder}/.increazy`, { recursive: true })
     cli.file.writeCwd(folder, '.increazy/.pages', JSON.stringify(pages, null, 2))
 }
