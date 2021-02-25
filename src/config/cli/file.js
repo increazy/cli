@@ -1,24 +1,26 @@
-const configuration = require('global-configuration')
+const Configstore = require('configstore')
 const dataURI = require('datauri')
 const fs = require('fs')
-const setConfiguration = require('global-configuration/set')
 const path = require('path')
 
-module.exports = {
-    write(name, content, type) {
-        // const filename = path.resolve(__dirname, '../../../.data/', name)
-        // fs.writeFileSync(filename, content)
+const config = new Configstore('increazy-cli', { foo: 'bar' })
 
-        setConfiguration({
-            [name]: content
-        })
+module.exports = {
+    env(name, value = null) {
+        if (value === null) return config.get(name)
+        config.set(name, value)
+        return value
+    },
+
+    write(name, content, type) {
+        const filename = path.resolve(__dirname, '../../../.data/', name)
+        fs.writeFileSync(filename, content)
         return content
     },
 
     read(name) {
-        // const filename = path.resolve(__dirname, '../../../.data/', name)
-        // return fs.readFileSync(filename).toString()
-        return configuration[name]
+        const filename = path.resolve(__dirname, '../../../.data/', name)
+        return fs.readFileSync(filename).toString()
     },
 
     writeCwd(folder, name, content, type) {

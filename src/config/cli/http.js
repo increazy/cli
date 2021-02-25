@@ -7,7 +7,7 @@ module.exports = (cli, path, method, body = {}) => {
         path = path.replace('p:', '')
 
         const headers = isPublic ? {} : {
-            'cli-token': cli.file.read('.auth')
+            'cli-token': cli.file.env('auth')
         }
 
         const instance = axios.create({
