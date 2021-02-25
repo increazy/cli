@@ -22,6 +22,7 @@ module.exports = (cli, folder, codes) => {
         } else if (code.extension === 'javascript') {
             subfolder = 'js/'
             name = name.replace('.javascript', '.js').replace(/^__javascript_/, '')
+            name = name === 'custom.js' ? 'index.js' : name
         }
 
         const _folder = `${folder}/${subfolder}`

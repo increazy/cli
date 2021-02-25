@@ -35,6 +35,8 @@ module.exports = (cli, program) => {
                     ...body
                 }
 
+                cli.file.write('.body-current', JSON.stringify(_body, null, 2))
+
                 const response = (await cli.http(`/projects/${settings._id}`, 'post', _body)).data
                 await loading.end()
 

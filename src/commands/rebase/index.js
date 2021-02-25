@@ -1,5 +1,5 @@
+const fs = require('fs')
 const createHistory = require('../get/create-history')
-const checkChanges = require('../deploy/check-changes')
 const downloadProject = require('../get/download-project')
 const downloadLoader = require('../get/download-loader')
 const saveCode = require('../get/save-code')
@@ -31,7 +31,7 @@ module.exports = (cli, program) => {
                 const settings = await downloadProject(cli, project, '0')
                 saveDrive(cli, folder, settings.files)
                 saveCode(cli, folder, settings.codes)
-                saveSettings(cli, folder, settings)
+                saveSettings(cli, folder, settings.pwa)
                 createHistory(cli, folder)
 
                 await loading.end()

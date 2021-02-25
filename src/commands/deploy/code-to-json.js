@@ -27,9 +27,16 @@ module.exports = async(cli) => {
         content: file.content
     }))
 
+    const js = generate(cli, 'js', file => ({
+        metadata: 'js',
+        name: file.name === 'index' ? '__custom' : `__javascript_${file.name}`,
+        extension: 'javascript',
+        content: file.content
+    }))
+
     const css = generate(cli, 'css', file => ({
         metadata: 'css',
-        name: `__css_${file.name}`,
+        name: ['global', 'mobile', 'async'].includes(file.name) ? `__${file.name}` : `__css_${file.name}`,
         extension: 'css',
         content: file.content
     }))
@@ -66,5 +73,5 @@ module.exports = async(cli) => {
     // cli.file.write('.pages', JSON.stringify(pages, null, 2))
     // cli.file.write('.root', JSON.stringify(root, null, 2))
 
-    return hooks.concat(css).concat(pages).concat(root)
+    return hooks.concat(css).concat(js).concat(pages).concat(root)
 }
