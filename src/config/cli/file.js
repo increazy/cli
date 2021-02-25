@@ -1,17 +1,24 @@
-const fs = require('fs')
-const path = require('path')
+const configuration = require('global-configuration')
 const dataURI = require('datauri')
+const fs = require('fs')
+const setConfiguration = require('global-configuration/set')
+const path = require('path')
 
 module.exports = {
     write(name, content, type) {
-        const filename = path.resolve(__dirname, '../../../.data/', name)
-        fs.writeFileSync(filename, content)
+        // const filename = path.resolve(__dirname, '../../../.data/', name)
+        // fs.writeFileSync(filename, content)
+
+        setConfiguration({
+            [name]: content
+        })
         return content
     },
 
     read(name) {
-        const filename = path.resolve(__dirname, '../../../.data/', name)
-        return fs.readFileSync(filename).toString()
+        // const filename = path.resolve(__dirname, '../../../.data/', name)
+        // return fs.readFileSync(filename).toString()
+        return configuration[name]
     },
 
     writeCwd(folder, name, content, type) {
