@@ -1,10 +1,12 @@
 const express = require('express')
+const fs = require('fs')
 const generateCss = require('./generate-css')
 const generateEngine = require('./generate-engine')
 const generateHooks = require('./generate-hooks')
 const generateJs = require('./generate-js')
 const includeHtmlDocument = require('./include-html-document')
 const resetServeFolder = require('./reset-serve-folder')
+const path = require('path')
 const transpilers = require('./transpilers')
 
 module.exports = (cli, program) => {
@@ -19,6 +21,7 @@ module.exports = (cli, program) => {
             app.use('/drive', express.static(process.cwd() + '/drive'))
 
             const action = async(page, res) => {
+                fs.mkdirSync(path.resolve(process.cwd(), '.increazy/.serve'))
                 generateCss(cli)
                 generateJs(cli)
                 generateHooks(cli)
