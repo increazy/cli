@@ -9,7 +9,7 @@ module.exports = (cli, program) => {
         .description('Finish the current task (git merge)')
         .action(async() => {
             try {
-                await cli.middleware(['auth'])
+                await cli.middleware(['new-version', 'auth'])
                 await commitTaskIfChanges(cli, 'end this task')
                 const branch = await getCurrentBranch(cli)
                 await pushCurrentTask(cli, branch)

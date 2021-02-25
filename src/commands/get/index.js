@@ -21,7 +21,7 @@ module.exports = (cli, program) => {
                     return cli.echo('red', '❌ We recommend installing Git to use the cli')
                 }
 
-                await cli.middleware(['auth'])
+                await cli.middleware(['new-version', 'auth'])
                 const { project, folder } = await chooseProject(cli)
 
                 const gitStatus = await checkGit(cli, project, folder)

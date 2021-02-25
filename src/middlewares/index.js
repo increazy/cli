@@ -1,5 +1,6 @@
 const middlewares = {
-    auth: require('../../middlewares/auth')
+    auth: require('./auth'),
+    'new-version': require('./new-version'),
 }
 
 module.exports = async(cli, toExecute) => {

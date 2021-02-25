@@ -19,7 +19,7 @@ module.exports = (cli, program) => {
                     return cli.echo('red', '❌ We recommend installing Git to use the cli')
                 }
 
-                await cli.middleware(['auth'])
+                await cli.middleware(['new-version', 'auth'])
                 const project = JSON.parse(cli.file.readCwd(process.cwd(), '.increazy/.project'))
                 const folder = process.cwd()
 
