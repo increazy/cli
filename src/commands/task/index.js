@@ -15,6 +15,7 @@ module.exports = (cli, program) => {
                 const { fromList, task } = await askTask(cli, tasks)
 
                 await pullTask(cli, task, fromList)
+                cli.file.env(`time.${task}`, +new Date())
             } catch (error) {
                 cli.echo('red', '❌ ' + error.message)
             }

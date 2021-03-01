@@ -12,5 +12,22 @@ toggleSuggests()
 
 function toggleSuggests() {
     const box = document.querySelector('*[pwa-has-suggest]')
-    box.style.display = ['block', null, '', undefined].includes(box.style.display) ? 'none' : 'block'
+    if (box) {
+        box.style.display = ['block', null, '', undefined].includes(box.style.display) ? 'none' : 'block'
+    }
+
+}
+
+if (window.innerWidth >= 1024) {
+    const mobileElements = document.querySelectorAll('*[pwa-is-mobile]')
+    for (let i = 0; i < mobileElements.length; i++) {
+        const element = mobileElements[i];
+        element.remove();
+    }
+} else {
+    const desktopElements = document.querySelectorAll('*[pwa-is-desktop]')
+    for (let i = 0; i < desktopElements.length; i++) {
+        const element = desktopElements[i];
+        element.remove();
+    }
 }

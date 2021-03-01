@@ -21,6 +21,7 @@ module.exports = (cli, program) => {
             app.use('/drive', express.static(process.cwd() + '/drive'))
 
             const action = async(page, res) => {
+                fs.rmdirSync(path.resolve(process.cwd(), '.increazy/.serve'), { recursive: true })
                 fs.mkdirSync(path.resolve(process.cwd(), '.increazy/.serve'))
                 generateCss(cli)
                 generateJs(cli)

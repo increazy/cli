@@ -8,6 +8,7 @@ module.exports = async(cli, task, fromList) => {
         await cli.git('add .')
         await cli.git(`commit -m "increazy: create task '${task}'"`)
         await cli.git(`push origin ${task}`)
+        await cli.git(`checkout ${task}`)
         cli.echo('green', '✅ We created the task for you, now just code!')
     }
 }

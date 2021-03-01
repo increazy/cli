@@ -13,6 +13,7 @@ module.exports = async cli => {
         .map(t => t.trim())
         .filter(t => t !== '')
         .filter(t => !t.startsWith('*'))
+        .filter(t => !t.includes('->'))
 
     const currentFormatted = await getCurrentBrach(cli)
     const tasks = [currentFormatted].concat(othersTasks)
