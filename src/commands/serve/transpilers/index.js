@@ -1,5 +1,6 @@
 module.exports = async(cli, code) => {
     const transpilers = [
+        require('./newsletter-to-form'),
         require('./search-form-to-html'),
         require('./product-list-to-html'),
         require('./import-components'),

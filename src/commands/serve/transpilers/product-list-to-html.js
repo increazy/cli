@@ -59,7 +59,7 @@ module.exports = async(cli, code) => {
             const { declaration } = match.groups
 
             return match[0]
-                .replace(/pwa-product-list/g, 'div')
+                .replace(/pwa-product-linkeds/g, 'div')
                 .replace('pwa-each-linked', `pwa-each-product="${size}"`)
                 .replace('<pwa-product-card>', productCard)
                 .replace(declaration, `${declaration} data-onload="product-linked-${name}-loaded"`)

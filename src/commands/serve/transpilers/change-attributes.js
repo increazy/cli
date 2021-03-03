@@ -12,7 +12,13 @@ module.exports = async(cli, code) => {
             } else if (page.includes('catalogsearch')) {
                 code = code.replace(match[0], `onclick="window.location.href = '/search'"`)
             } else {
-                code = code.replace(match[0], `onclick="window.location.href = '/category'"`)
+                const pages = JSON.parse(cli.file.readCwd(process.cwd(), '.increazy/.pages'))
+                const pagesNames = pages.map(p => p.name.toLowerCase())
+                if (pagesNames.includes(page.toLowerCase().replace('/', ''))) {
+                    code = code.replace(match[0], `onclick="window.location.href = '/p${page}'"`)
+                } else {
+                    code = code.replace(match[0], `onclick="window.location.href = '/category'"`)
+                }
             }
         } else if (page === 'home') {
             code = code.replace(match[0], `onclick="window.location.href = '/'"`)
