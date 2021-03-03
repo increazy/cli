@@ -1,10 +1,13 @@
 const fs = require('fs')
+const rimraf = require('rimraf')
 
 module.exports = cli => {
     const serveFolder = process.cwd() + '/.increazy/.serve'
-    fs.rmdirSync(serveFolder, { recursive: true })
-    fs.mkdirSync(serveFolder, { recursive: true })
+    if (fs.existsSync(serveFolder)) {
+        rimraf.sync(serveFolder)
+    }
 
+    fs.mkdirSync(serveFolder, { recursive: true })
 
     return serveFolder
 }
