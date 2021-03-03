@@ -1,4 +1,5 @@
 const fs = require('fs')
+const rimraf = require('rimraf')
 
 module.exports = async cli => {
     const loading = cli.loading([
@@ -37,7 +38,9 @@ module.exports = async cli => {
         })
 
         if (!toOverwrite) throw new Error('❌ Aborted')
-        fs.rmdirSync(folder, { recursive: true })
+        if (fs.existsSync(folder)) {
+            rimraf.sync(folder)
+        }
     }
 
     fs.mkdirSync(folder, { recursive: true })

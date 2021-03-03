@@ -5,6 +5,7 @@ const downloadLoader = require('../get/download-loader')
 const saveCode = require('../get/save-code')
 const saveDrive = require('../get/save-drive')
 const saveSettings = require('../get/save-settings')
+const rimraf = require('rimraf')
 
 
 module.exports = (cli, program) => {
@@ -24,9 +25,15 @@ module.exports = (cli, program) => {
                 const folder = process.cwd()
 
                 loading.start()
-                fs.rmdirSync(`${folder}/drive`, { recursive: true })
-                fs.rmdirSync(`${folder}/pages`, { recursive: true })
-                fs.rmdirSync(`${folder}/*.*`, { recursive: true })
+                if (fs.existsSync(`${folder}/drive`)) {
+                    rimraf.sync(`${folder}/drive`)
+                }
+                if (fs.existsSync(`${folder}/pages`)) {
+                    rimraf.sync(`${folder}/pages`)
+                }
+                if (fs.existsSync(`${folder}/*.*`)) {
+                    rimraf.sync(`${folder}/*.*`)
+                }
 
                 const settings = await downloadProject(cli, project, '0')
                 saveDrive(cli, folder, settings.files)
