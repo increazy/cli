@@ -67,11 +67,5 @@ module.exports = async(cli) => {
         content: file.content
     }))
 
-
-    // cli.file.write('.hooks', JSON.stringify(hooks, null, 2))
-    // cli.file.write('.css', JSON.stringify(css, null, 2))
-    // cli.file.write('.pages', JSON.stringify(pages, null, 2))
-    // cli.file.write('.root', JSON.stringify(root, null, 2))
-
     return hooks.concat(css).concat(js).concat(pages).concat(root)
 }
