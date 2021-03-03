@@ -1,5 +1,5 @@
 module.exports = async(cli, folder, project) => {
-    const gitignore = '.increazy/.history\n.increazy/.Serve'
+    const gitignore = '.increazy/.history\n.increazy/.serve'
     cli.file.writeCwd(folder, '.gitignore', gitignore)
 
     cli.exec('cd', [folder])

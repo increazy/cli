@@ -6,6 +6,7 @@ const saveCode = require('../get/save-code')
 const saveDrive = require('../get/save-drive')
 const saveSettings = require('../get/save-settings')
 const rimraf = require('rimraf')
+const commitTaskIfChanges = require('../_utils/commit-task-if-changes')
 
 
 module.exports = (cli, program) => {
@@ -21,6 +22,17 @@ module.exports = (cli, program) => {
                 }
 
                 await cli.middleware(['new-version', 'auth'])
+
+                const confirmDeploy = await cli.input({
+                    type: 'confirm',
+                    message: `🚸 Are you sure you want to rebase? By doing this you will download the dashboard code and overwrite the current task`
+                })
+
+                if (!confirmDeploy) throw new Error('Rebase has been canceled')
+
+                await commitTaskIfChanges(cli, 'rebase')
+
+
                 const project = JSON.parse(cli.file.readCwd(process.cwd(), '.increazy/.project'))
                 const folder = process.cwd()
 
