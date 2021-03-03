@@ -6,6 +6,7 @@ const generateHooks = require('./generate-hooks')
 const generateJs = require('./generate-js')
 const includeHtmlDocument = require('./include-html-document')
 const resetServeFolder = require('./reset-serve-folder')
+const rimraf = require('rimraf')
 const path = require('path')
 const transpilers = require('./transpilers')
 
@@ -21,8 +22,12 @@ module.exports = (cli, program) => {
             app.use('/drive', express.static(process.cwd() + '/drive'))
 
             const action = async(page, res) => {
-                fs.rmdirSync(path.resolve(process.cwd(), '.increazy/.serve'), { recursive: true })
-                fs.mkdirSync(path.resolve(process.cwd(), '.increazy/.serve'))
+                const serveFolder = path.resolve(process.cwd(), '.increazy/.serve')
+                if (fs.existsSync(serveFolder)) {
+                    rimraf.sync(serveFolder)
+                }
+
+                fs.mkdirSync(serveFolder, { recursive: true })
                 generateCss(cli)
                 generateJs(cli)
                 generateHooks(cli)
