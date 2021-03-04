@@ -49,7 +49,7 @@ module.exports = (cli, program) => {
 
                 const settings = await downloadProject(cli, project, '0')
                 saveDrive(cli, folder, settings.files)
-                saveCode(cli, folder, settings.codes)
+                saveCode(cli, folder, settings.codes, 0)
                 saveSettings(cli, folder, settings.pwa)
                 createHistory(cli, folder)
 

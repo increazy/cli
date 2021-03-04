@@ -10,9 +10,9 @@ module.exports = async(cli, code) => {
         const params = cropedDeclaration.length > 1 ? cropedDeclaration.slice(1).join(':') : ''
 
         if (eventName === 'data-onload') {
-            code = code.replace(match[0], `data-onload="${name}$%$${params}"`)
+            code = code.replace(match[0], `data-onload="--${name}$%$${params}"`)
         } else {
-            code = code.replace(match[0], `${eventName}="$hook('${name}', this, '${params}')"`)
+            code = code.replace(match[0], `${eventName}="$hook('--${name}', this, '${params}')"`)
         }
     }
 

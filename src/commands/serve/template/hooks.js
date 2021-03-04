@@ -31,17 +31,8 @@ const componentMocked = {
     }
 }
 
-const defaultHooks = ['cart-', 'product-list']
-
 function $hook(name, el, params) {
     try {
-        name = `--${name}`
-        defaultHooks.forEach(hook => {
-            if (name.startsWith(`--${hook}`)) {
-                name = name.replace(/^--/, '')
-            }
-        })
-
         if (!(name in hooks)) {
             return console.info(`Hook '${name}' not found`)
         }

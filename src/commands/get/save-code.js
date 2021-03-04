@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-module.exports = (cli, folder, codes) => {
+module.exports = (cli, folder, codes, gitStatus) => {
     const pages = []
 
     codes.forEach(code => {
@@ -31,5 +31,7 @@ module.exports = (cli, folder, codes) => {
     })
 
     fs.mkdirSync(`${folder}/.increazy`, { recursive: true })
-    cli.file.writeCwd(folder, '.increazy/.pages', JSON.stringify(pages, null, 2))
+    if (gitStatus !== 1) {
+        cli.file.writeCwd(folder, '.increazy/.pages', JSON.stringify(pages, null, 2))
+    }
 }
