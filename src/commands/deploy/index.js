@@ -15,7 +15,7 @@ module.exports = (cli, program) => {
             const loading = deployLoader(cli)
 
             try {
-                await cli.middleware(['new-version', 'auth'])
+                await cli.middleware(['new-version', 'auth', 'check-folder'])
                 const { env, body } = await setEnv(cli)
 
                 console.time('🕓 Deployment duration: ')

@@ -1,6 +1,7 @@
 const middlewares = {
     auth: require('./auth'),
     'new-version': require('./new-version'),
+    'check-folder': require('./check-folder'),
 }
 
 module.exports = async(cli, toExecute) => {

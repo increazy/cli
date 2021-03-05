@@ -11,7 +11,7 @@ module.exports = (cli, program) => {
         .action(async() => {
             try {
 
-                await cli.middleware(['new-version', 'auth'])
+                await cli.middleware(['new-version', 'auth', 'check-folder'])
                 await commitTaskIfChanges(cli, 'end this task')
                 const branch = await getCurrentBranch(cli)
                 await pushCurrentTask(cli, branch)

@@ -5,7 +5,7 @@ module.exports = (cli, program) => {
         .action(async() => {
             try {
                 const branchList = await cli.git('branch -a')
-                await cli.middleware(['new-version', 'auth'])
+                await cli.middleware(['new-version', 'auth', 'check-folder'])
                 cli.echo('cyan', '* Is your current task\n')
                 cli.echo('white', branchList.replace(/remotes\/origin\//g, ''))
                 cli.echo('cyan', '\n* Is your current task')

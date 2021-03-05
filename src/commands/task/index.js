@@ -9,7 +9,7 @@ module.exports = (cli, program) => {
         .description('Create or get a separate task for you (git branch)')
         .action(async() => {
             try {
-                await cli.middleware(['new-version', 'auth'])
+                await cli.middleware(['new-version', 'auth', 'check-folder'])
                 await commitTaskIfChanges(cli, 'change task')
                 const tasks = await getAllTasks(cli)
                 const { fromList, task } = await askTask(cli, tasks)

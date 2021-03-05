@@ -21,7 +21,7 @@ module.exports = (cli, program) => {
                     return cli.echo('red', '❌ We recommend installing Git to use the cli')
                 }
 
-                await cli.middleware(['new-version', 'auth'])
+                await cli.middleware(['new-version', 'auth', 'check-folder'])
 
                 const confirmDeploy = await cli.input({
                     type: 'confirm',

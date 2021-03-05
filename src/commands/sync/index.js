@@ -8,7 +8,7 @@ module.exports = (cli, program) => {
         .description('Synchronizes current task')
         .action(async() => {
             try {
-                await cli.middleware(['new-version', 'auth'])
+                await cli.middleware(['new-version', 'auth', 'check-folder'])
                 const branch = await getCurrentBrach(cli)
                 cli.echo('white', `🎈 Synchronizing task '${branch}'..`)
                 await commitTaskIfChanges(cli, 'sync')
