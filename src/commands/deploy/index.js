@@ -2,6 +2,7 @@ const checkChanges = require('./check-changes')
 const checkGitBranch = require('./check-git-branch')
 const codeToJSON = require('./code-to-json')
 const deployLoader = require('./deploy-loader')
+const getCurrentBranch = require('../_utils/get-current-brach')
 const setEnv = require('./set-env')
 const settingsToJSON = require('./settings-to-json')
 const uploadCodeChanges = require('./upload-code-changes')
@@ -21,13 +22,17 @@ module.exports = (cli, program) => {
                 console.time('🕓 Deployment duration: ')
                 const { changes, saveNewHistory } = await checkChanges(cli)
                 const settings = await settingsToJSON(cli)
+                const branch = await getCurrentBranch(cli)
                 await checkGitBranch(cli, env, settings)
 
                 setTimeout(() => loading.start(), 500)
                 const codes = await codeToJSON(cli)
-                await uploadCodeChanges(cli, changes, codes, settings)
-                await uploadDriveChanges(cli, changes, settings)
-                saveNewHistory()
+
+                if (branch === 'master') {
+                    await uploadCodeChanges(cli, changes, codes, settings)
+                    await uploadDriveChanges(cli, changes, settings)
+                    saveNewHistory()
+                }
 
                 const _body = {
                     project: { codes },
