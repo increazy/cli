@@ -22,7 +22,7 @@ module.exports = async cli => {
         }
     }
 
-    const subfolder = cli.dev() ? 'projects/' : ''
+    const subfolder = ''
     const folder = process.cwd() + `/${subfolder}` + folderAnswered
 
     const index = choices.indexOf(selected)
