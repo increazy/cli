@@ -2,6 +2,7 @@ const middlewares = {
     auth: require('./auth'),
     'new-version': require('./new-version'),
     'check-folder': require('./check-folder'),
+    'print-branch': require('./print-branch'),
 }
 
 module.exports = async(cli, toExecute) => {

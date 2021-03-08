@@ -1,4 +1,7 @@
-module.exports = async(cli, changes, codes, settings) => {
+const fs = require('fs')
+const path = require('path')
+
+module.exports = async(cli, changes, codes, settings, branch) => {
     changes = changes.filter(c => !c[1].includes('/drive/'))
     let changesToUpload = []
 
@@ -49,5 +52,15 @@ module.exports = async(cli, changes, codes, settings) => {
         }
     }
 
-    await cli.http(`/upload/code/${settings._id}`, 'post', { changes: changesToUpload })
+    const response = await cli.http(`/upload/code/${settings._id}`, 'post', { changes: changesToUpload })
+
+    fs.mkdirSync(path.resolve(process.cwd(), '.increazy/.backup'), { recursive: true })
+
+    response.data.olds.forEach(code => {
+        cli.file.writeCwd(process.cwd(), `.increazy/.backup/${code.name}.${code.extension}`, code.content)
+    })
+
+    await cli.git('add .')
+    await cli.git('commit -m "cli: backup dashboard files"')
+    await cli.git(`push origin ${branch}`)
 }

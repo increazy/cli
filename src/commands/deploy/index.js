@@ -16,7 +16,7 @@ module.exports = (cli, program) => {
             const loading = deployLoader(cli)
 
             try {
-                await cli.middleware(['new-version', 'auth', 'check-folder'])
+                await cli.middleware(['new-version', 'auth', 'check-folder', 'print-branch'])
                 const { env, body } = await setEnv(cli)
 
                 console.time('🕓 Deployment duration: ')
@@ -27,10 +27,10 @@ module.exports = (cli, program) => {
 
                 setTimeout(() => loading.start(), 500)
                 const codes = await codeToJSON(cli)
+                await uploadDriveChanges(cli, changes, settings)
 
                 if (branch === 'master') {
-                    await uploadCodeChanges(cli, changes, codes, settings)
-                    await uploadDriveChanges(cli, changes, settings)
+                    await uploadCodeChanges(cli, changes, codes, settings, branch)
                     saveNewHistory()
                 }
 
