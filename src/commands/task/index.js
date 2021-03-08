@@ -2,6 +2,7 @@ const commitTaskIfChanges = require('../_utils/commit-task-if-changes')
 const getAllTasks = require('../_utils/get-all-tasks')
 const askTask = require('./ask-task')
 const pullTask = require('./pull-task')
+const rebase = require('../rebase/rebase')
 
 module.exports = (cli, program) => {
     program
@@ -16,6 +17,11 @@ module.exports = (cli, program) => {
 
                 await pullTask(cli, task, fromList)
                 cli.file.env(`time.${task}`, +new Date())
+
+                if (!fromList) await rebase(cli, false)
+                await cli.git('add .')
+                await cli.git(`commit -m "cli: creating ${task}"`)
+                await cli.git(`push origin ${task}`)
             } catch (error) {
                 cli.echo('red', '❌ ' + error.message)
             }
