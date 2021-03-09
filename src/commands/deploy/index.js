@@ -48,11 +48,13 @@ module.exports = (cli, program) => {
                     console.timeEnd('🕓 Deployment duration: ')
                 }, 500)
             } catch (error) {
-                // await loading.end()
+                await loading.end()
                 if (error.message === '0') return
                 cli.echo('red', '❌ ' + error.message)
                 if (error.response) {
                     cli.dev(error.response.data)
+                } else {
+                    cli.dev(error)
                 }
             }
         })
