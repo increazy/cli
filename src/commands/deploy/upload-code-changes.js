@@ -41,7 +41,7 @@ module.exports = async(cli, changes, codes, settings, branch) => {
                     .replace(/^__hook_/, '')
                     .replace(/^__/, '')
 
-                if (change[1].endsWith(cleanedFilename)) {
+                if (change[1].endsWith(cleanedFilename) || (change[1].endsWith('/default.js') && cleanedFilename === 'hooks.js')) {
                     changesToUpload.push({
                         ...code,
                         type: change[0],
@@ -51,6 +51,8 @@ module.exports = async(cli, changes, codes, settings, branch) => {
             }
         }
     }
+
+    fs.writeFileSync(__dirname + '/.body', JSON.stringify(changesToUpload))
 
     const response = await cli.http(`/upload/code/${settings._id}`, 'post', { changes: changesToUpload })
 

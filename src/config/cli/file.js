@@ -38,4 +38,10 @@ module.exports = {
         const filename = path.resolve(folder, name)
         return dataURI(filename)
     },
+
+    sizeCwd(folder, name) {
+        const filename = path.resolve(folder, name)
+        var stats = fs.statSync(filename)
+        return stats.size / (1024*1024);
+    },
 }
