@@ -33,7 +33,7 @@ module.exports = (cli, program) => {
                 saveSettings(cli, folder, settings.pwa)
                 createHistory(cli, folder)
 
-                if (gitStatus === 0) {
+                if (+gitStatus === 0) {
                     await createGit(cli, folder, settings.pwa)
                 }
 
