@@ -1,4 +1,4 @@
 module.exports = {
-    api: 'https://connect.pwa4all.com/cli',
+    api: 'http://localhost:5000/cli',
     dev: true,
 }
