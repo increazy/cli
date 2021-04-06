@@ -3,6 +3,7 @@ const checkGitBranch = require('../deploy/check-git-branch')
 const codeToJSON = require('../deploy/code-to-json')
 const deployLoader = require('../deploy/deploy-loader')
 const getCurrentBranch = require('../_utils/get-current-brach')
+const setEnv = require('../deploy/set-env')
 const settingsToJSON = require('../deploy/settings-to-json')
 const uploadCodeChanges = require('../deploy/upload-code-changes')
 const uploadDriveChanges = require('../deploy/upload-drive-changes')
@@ -18,12 +19,7 @@ module.exports = async(cli, branch) => {
   const loading = deployLoader(cli)
 
   try {
-    const env = 'labShared'
-    const body = {
-      testcase: true,
-      shared: true,
-      indexed: false
-    }
+    const { env, body } = await setEnv(cli)
 
     console.time('🕓 Deployment duration: ')
     const { changes, saveNewHistory } = await checkChanges(cli)
