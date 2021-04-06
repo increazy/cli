@@ -39,6 +39,7 @@ module.exports = (cli, program) => {
                     s3: true,
                     ...body
                 }
+
                 const response = (await cli.http(`/projects/${settings._id}`, 'post', _body)).data
                 await loading.end()
 

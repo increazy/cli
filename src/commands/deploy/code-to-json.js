@@ -29,7 +29,7 @@ module.exports = async(cli) => {
 
     const js = generate(cli, 'js', file => ({
         metadata: 'js',
-        name: file.name === 'index' ? '__custom' : `__javascript_${file.name}`,
+        name: ['custom', 'index'].includes(file.name) ? '__custom' : `__javascript_${file.name}`,
         extension: 'javascript',
         content: file.content
     }))
