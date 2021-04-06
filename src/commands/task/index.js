@@ -21,6 +21,7 @@ module.exports = (cli, program) => {
                 if (!fromList) await rebase(cli, false)
                 await cli.git('add .')
                 await cli.git(`commit -m "cli: creating ${task}"`)
+                await cli.git('fetch')
                 await cli.git(`push origin ${task}`)
             } catch (error) {
                 cli.echo('red', '❌ ' + error.message)

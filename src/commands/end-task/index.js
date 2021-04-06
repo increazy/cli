@@ -3,6 +3,7 @@ const getCurrentBranch = require('../_utils/get-current-brach')
 const humanizeDuration = require('humanize-duration')
 const mergeToMaster = require('./merge-to-master')
 const pushCurrentTask = require('./push-current-task')
+const sendDeploy = require('./send-deploy')
 
 module.exports = (cli, program) => {
     program
@@ -24,6 +25,8 @@ module.exports = (cli, program) => {
                 cli.echo('green', `✅ '${branch}' was finalized and sent to master, now you can deploy it`)
                 cli.echo('white', `⏳ That task lasted ${taskDuration}`)
                 cli.echo('white', '🚗 we moved you to the task master now')
+
+                await sendDeploy(cli)
             } catch (error) {
                 if (error.message !== '') {
                     cli.echo('red', '❌ ' + error.message)
