@@ -21,32 +21,32 @@ module.exports = (cli, program) => {
 
                 console.time('🕓 Deployment duration: ')
                 const { changes, saveNewHistory } = await checkChanges(cli)
-                const settings = await settingsToJSON(cli)
-                const branch = await getCurrentBranch(cli)
-                await checkGitBranch(cli, env, settings)
+                // const settings = await settingsToJSON(cli)
+                // const branch = await getCurrentBranch(cli)
+                // await checkGitBranch(cli, env, settings)
 
-                setTimeout(() => loading.start(), 500)
-                const codes = await codeToJSON(cli)
-                await uploadDriveChanges(cli, changes, settings)
+                // setTimeout(() => loading.start(), 500)
+                // const codes = await codeToJSON(cli)
+                // await uploadDriveChanges(cli, changes, settings)
 
-                if (branch === 'master') {
-                    await uploadCodeChanges(cli, changes, codes, settings, branch)
-                    saveNewHistory()
-                }
+                // if (branch === 'master') {
+                //     await uploadCodeChanges(cli, changes, codes, settings, branch)
+                //     saveNewHistory()
+                // }
 
-                const _body = {
-                    project: { codes },
-                    s3: true,
-                    ...body
-                }
+                // const _body = {
+                //     project: { codes },
+                //     s3: true,
+                //     ...body
+                // }
 
-                const response = (await cli.http(`/projects/${settings._id}`, 'post', _body)).data
-                await loading.end()
+                // const response = (await cli.http(`/projects/${settings._id}`, 'post', _body)).data
+                // await loading.end()
 
-                cli.echo('green', `🌍 ${response.url}`)
-                setTimeout(() => {
-                    console.timeEnd('🕓 Deployment duration: ')
-                }, 500)
+                // cli.echo('green', `🌍 ${response.url}`)
+                // setTimeout(() => {
+                //     console.timeEnd('🕓 Deployment duration: ')
+                // }, 500)
             } catch (error) {
                 setTimeout(async () => {
                     await loading.end()

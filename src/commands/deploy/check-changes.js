@@ -7,15 +7,20 @@ module.exports = async(cli, showContinueDeploying = true) => {
 
     const changes = currentHistory.reduce((changes, file) => {
         let oldFind = null
+        const split = file.path.split('/')
+        const path = split[split.length - 1]
         oldHistory.forEach(oldFile => {
-            if (oldFile.path === file.path) {
+            if (oldFile.path.endsWith(path)) {
                 oldFind = oldFile
             }
         })
 
+        const oldDate = oldFind === null ? null : (new Date(oldFind.date)).getTime()
+        const newDate = (new Date(file.date)).getTime()
+
         if (oldFind === null) {
             changes.push(['new', file.path])
-        } else if (oldFind.date !== file.date) {
+        } else if (oldDate < newDate) {
             changes.push(['change', file.path])
         }
 
@@ -23,9 +28,19 @@ module.exports = async(cli, showContinueDeploying = true) => {
     }, [])
 
 
-    const currentFilesName = currentHistory.map(c => c.path)
+    const currentFilesName = currentHistory.map(c => {
+        const split = c.path.split('/')
+        return split[split.length - 1]
+    })
+    const oldHistoryNames = oldHistory.map(c => {
+        const split = c.path.split('/')
+        return split[split.length - 1]
+    })
+
     oldHistory.forEach(oldFile => {
-        if (!currentFilesName.includes(oldFile.path) && !oldFile.path.includes('/.increazy/') && !oldFile.path.includes('/.git/')) {
+        const split = oldFile.path.split('/')
+        const path = split[split.length - 1]
+        if (!currentFilesName.includes(path) && !oldFile.path.includes('/.increazy/') && !oldFile.path.includes('/.git/')) {
             changes.push(['remove', oldFile.path])
         }
     })
