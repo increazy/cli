@@ -4,6 +4,10 @@ const generate = (cli, folderName, callback) => {
     const folder = process.cwd() + `/${folderName}`
     const files = [];
 
+    if (!fs.existsSync(folder)) {
+        fs.mkdirSync(folder)
+    }
+
     const _files = fs.readdirSync(folder)
     for (const file of _files) {
         if (file.includes('.') && !file.startsWith('.')) {
