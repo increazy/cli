@@ -23,6 +23,10 @@ module.exports = (cli, folder, codes, gitStatus) => {
             subfolder = 'js/'
             name = name.replace('.javascript', '.js').replace(/^__javascript_/, '')
             name = name === 'custom.js' ? 'index.js' : name
+        } else if (code.metadata === 'block') {
+            subfolder = 'blocks/'
+            console.log(name)
+            name = name.replace(/^__block_/, '')
         }
 
         const _folder = `${folder}/${subfolder}`

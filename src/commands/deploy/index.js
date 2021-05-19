@@ -7,6 +7,7 @@ const setEnv = require('./set-env')
 const settingsToJSON = require('./settings-to-json')
 const uploadCodeChanges = require('./upload-code-changes')
 const uploadDriveChanges = require('./upload-drive-changes')
+const fs = require('fs')
 
 module.exports = (cli, program) => {
     program

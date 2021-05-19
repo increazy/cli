@@ -27,6 +27,13 @@ module.exports = async(cli) => {
         content: file.content
     }))
 
+    const blocks = generate(cli, 'blocks', file => ({
+        metadata: 'block',
+        name: `__block_${file.name}`,
+        extension: 'html',
+        content: file.content
+    }))
+
     const js = generate(cli, 'js', file => ({
         metadata: 'js',
         name: ['custom', 'index'].includes(file.name) ? '__custom' : `__javascript_${file.name}`,
@@ -67,5 +74,5 @@ module.exports = async(cli) => {
         content: file.content
     }))
 
-    return hooks.concat(css).concat(js).concat(pages).concat(root)
+    return hooks.concat(css).concat(js).concat(pages).concat(blocks).concat(root)
 }

@@ -17,6 +17,7 @@ module.exports = async(cli, changes, codes, settings, branch) => {
             const isJs = change[1].includes('/js/')
             const isCss = change[1].includes('/css/')
             const isPage = change[1].includes('/pages/')
+            const isBlock = change[1].includes('/blocks/')
 
             if (isHook) {
                 name = `hook_${name}`
@@ -24,6 +25,8 @@ module.exports = async(cli, changes, codes, settings, branch) => {
                 name = `javascript_${name}`
             } else if (isCss) {
                 name = `css_${name}`
+            } else if (isBlock) {
+                name = `block_${name}`
             }
 
             changesToUpload.push({
@@ -39,6 +42,7 @@ module.exports = async(cli, changes, codes, settings, branch) => {
                     .replace(/^__css_/, '')
                     .replace(/^__javascript_/, '')
                     .replace(/^__hook_/, '')
+                    .replace(/^__block_/, '')
                     .replace(/^__/, '')
 
                 if (change[1].endsWith(cleanedFilename) || (change[1].endsWith('/default.js') && cleanedFilename === 'hooks.js')) {
@@ -51,8 +55,6 @@ module.exports = async(cli, changes, codes, settings, branch) => {
             }
         }
     }
-
-    fs.writeFileSync(__dirname + '/.body', JSON.stringify(changesToUpload))
 
     const response = await cli.http(`/upload/code/${settings._id}`, 'post', { changes: changesToUpload })
 
