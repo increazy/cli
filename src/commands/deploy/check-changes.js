@@ -1,5 +1,12 @@
 const getHistory = require('../_utils/get-files-history')
 
+const allowedFiles = [
+    'cart.html', 'category.html', 'display_rules.json', 'footer.html',
+    'global_vars.json', 'header.html', 'home.html', 'product_card.html',
+    'product_modal.json', 'product.html', 'scripts_body.html', 'scripts_head.html',
+    'search.json', '/blocks/', '/css/', '/drive/', '/hooks/', '/js/'
+]
+
 module.exports = async(cli, showContinueDeploying = true) => {
     const folder = process.cwd()
     const currentHistory = getHistory(folder)
@@ -18,10 +25,19 @@ module.exports = async(cli, showContinueDeploying = true) => {
         const oldDate = oldFind === null ? null : (new Date(oldFind.date)).getTime()
         const newDate = (new Date(file.date)).getTime()
 
-        if (oldFind === null) {
-            changes.push(['new', file.path])
-        } else if (oldDate < newDate) {
-            changes.push(['change', file.path])
+        const isValidFile = allowedFiles.reduce((result, match) => {
+            if (file.path.includes(match)) {
+                return true
+            }
+            return result
+        }, false)
+
+        if (isValidFile) {
+            if (oldFind === null) {
+                changes.push(['new', file.path])
+            } else if (oldDate < newDate) {
+                changes.push(['change', file.path])
+            }
         }
 
         return changes
