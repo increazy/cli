@@ -34,6 +34,10 @@ module.exports = (cli, folder, codes, gitStatus) => {
         cli.file.writeCwd(_folder, name.replace(/^__/, ''), code.content)
     })
 
+    if (!fs.existsSync(`${folder}/blocks`)) {
+        fs.mkdirSync(`${folder}/blocks`, { recursive: true })
+    }
+
     fs.mkdirSync(`${folder}/.increazy`, { recursive: true })
     if (+gitStatus !== 1) {
         cli.file.writeCwd(folder, '.increazy/.pages', JSON.stringify(pages, null, 2))

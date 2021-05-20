@@ -27,8 +27,8 @@ module.exports = () => ({
     has_skus: false,
     sku: faker.commerce.productMaterial(),
     meta_title: faker.commerce.productName(),
-    meta_description: faker.commerce.productDescription(),
-    description: faker.commerce.productDescription(),
+    meta_description: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(),
     images: [
         faker.image.imageUrl(600, 600),
         faker.image.imageUrl(600, 600),
