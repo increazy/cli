@@ -13,6 +13,8 @@ module.exports = (cli, path, method, body = {}) => {
         const instance = axios.create({
             baseURL: variables.api,
             timeout: 3600000,
+            maxBodyLength: Infinity,
+            maxContentLengthm: Infinity,
             headers
         })
 
