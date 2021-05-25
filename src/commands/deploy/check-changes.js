@@ -4,7 +4,7 @@ const allowedFiles = [
     'cart.html', 'category.html', 'display_rules.json', 'footer.html',
     'global_vars.json', 'header.html', 'home.html', 'product_card.html',
     'product_modal.json', 'product.html', 'scripts_body.html', 'scripts_head.html',
-    'search.json', '/blocks/', '/css/', '/drive/', '/hooks/', '/js/'
+    'search.json', '/blocks/', '/css/', '/drive/', '/hooks/', '/js/', '/pages/'
 ]
 
 module.exports = async(cli, showContinueDeploying = true) => {
